@@ -131,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToGenerateCoins: 0
   income: 10
+  cost: 5
   cantBuildImage: {fileID: 212008998647677258}
 --- !u!212 &212008998647677258
 SpriteRenderer:

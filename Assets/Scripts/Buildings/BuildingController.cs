@@ -6,6 +6,7 @@ public class BuildingController : MonoBehaviour {
 
 	public float timeToGenerateCoins = 30f;
 	public int income = 10;
+	public int cost = 1;
 	public SpriteRenderer cantBuildImage;
 
 	private bool canBuild;
@@ -39,6 +40,7 @@ public class BuildingController : MonoBehaviour {
 		if(canBuild)
 		{
 			cantBuildImage.gameObject.SetActive (false);
+			GameController.instance.Spend (cost);
 		}
 		else
 		{

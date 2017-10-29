@@ -17,4 +17,9 @@ public class ButtonClick : MonoBehaviour, IPointerDownHandler{
 		}
 	}
 
+	public int GetButtonCost()
+	{
+		return prefab.GetComponent <BuildingController> ().cost;
+	}
+
 }

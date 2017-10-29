@@ -8,8 +8,9 @@ public class GameController : MonoBehaviour {
 
 	public bool touchInput = true;
 	public static GameController instance;
+	public int[] costsPerButton;
 
-	private int coins = 0;
+	private int wallet = 30;
 
 	private CameraController cameraScript;
 	private ButtonsCanvasController buttonCanvas;
@@ -62,6 +63,11 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	void Start()
+	{
+		//buttonCanvas.CheckButtons (wallet);
+	}
+
 	public void BuildNew(GameObject building)
 	{
 		cameraScript.SetCanMoveTo (false);
@@ -81,6 +87,18 @@ public class GameController : MonoBehaviour {
 		BuildingController buildingController = instance.GetComponent <BuildingController> ();
 
 		StartCoroutine (PositionNewBuilding (instance, buildingController));
+	}
+
+	public void Spend(int coins)
+	{
+		wallet -= coins;
+		buttonCanvas.CheckButtons (wallet);
+	}
+
+	public void Receive(int coins)
+	{
+		wallet += coins;
+		buttonCanvas.CheckButtons (wallet);
 	}
 
 	private IEnumerator PositionNewBuilding(GameObject building, BuildingController buildingController)
