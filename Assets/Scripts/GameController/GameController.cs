@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
 	public Text coinCount;
 
 	private int wallet = 30;
+	private bool isPaused;
 
 	private CameraController cameraScript;
 	private ButtonsCanvasController buttonCanvas;
@@ -64,6 +65,8 @@ public class GameController : MonoBehaviour {
 			Debug.LogError ("No button canvas controller found in scene");
 			Debug.Break ();
 		}
+
+		isPaused = false;
 	}
 
 	void Start()
@@ -91,6 +94,28 @@ public class GameController : MonoBehaviour {
 		BuildingController buildingController = instance.GetComponent <BuildingController> ();
 
 		StartCoroutine (PositionNewBuilding (instance, buildingController));
+	}
+
+	public void Pause(Image buttonImage)
+	{
+		isPaused = !isPaused;
+
+		if (isPaused) 
+		{
+			buttonImage.color = Color.cyan;
+
+			buttonCanvas.Hide ();
+
+			Time.timeScale = 0;
+		} 
+		else
+		{
+			buttonImage.color = Color.white;
+
+			buttonCanvas.Show ();
+
+			Time.timeScale = 1;
+		}
 	}
 
 	public void Spend(int coins)
