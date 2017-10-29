@@ -50,13 +50,10 @@ public class CameraController : MonoBehaviour {
 		Touch touch = Input.GetTouch (0);
 
 		Vector3 movement = touch.deltaPosition * cameraSpeed * Time.deltaTime;
-		if(invertControls)
-		{
-			movement.x *= -1;
-		}
-		else 
+		if(!invertControls)
 		{
 			movement.y *= -1;
+			movement.x *= -1;
 		}
 
 		transform.position += movement;
