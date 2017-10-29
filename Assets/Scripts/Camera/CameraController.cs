@@ -19,6 +19,8 @@ public class CameraController : MonoBehaviour {
 	public float minOrtographicSize = 3.0f;
 	public Boundary cameraBoundaries;
 
+	private bool canMove;
+
 	private Camera m_camera;
 
 	void Awake()
@@ -30,10 +32,14 @@ public class CameraController : MonoBehaviour {
 			Debug.Break ();
 		}
 
+		canMove = true;
 	}
 
 	void Update()
 	{
+		if (!canMove)
+			return;
+		
 		if(Input.touchCount == 1)
 		{
 			MoveCameraRig ();
@@ -43,6 +49,11 @@ public class CameraController : MonoBehaviour {
 		{
 			PinchToZoom ();
 		}
+	}
+
+	public void SetCanMoveTo(bool value)
+	{
+		canMove = value;
 	}
 
 	private void MoveCameraRig()
