@@ -22,6 +22,7 @@ public class CameraController : MonoBehaviour {
 	private bool canMove;
 
 	private Camera m_camera;
+	private InputManager inputManager;
 
 	void Awake()
 	{
@@ -32,6 +33,12 @@ public class CameraController : MonoBehaviour {
 			Debug.Break ();
 		}
 
+		canMove = false;
+	}
+
+	public void SetInputManager(InputManager instance)
+	{
+		inputManager = instance;
 		canMove = true;
 	}
 
@@ -40,12 +47,12 @@ public class CameraController : MonoBehaviour {
 		if (!canMove)
 			return;
 		
-		if(Input.touchCount == 1)
+		if(inputManager.IsMovingClick ())
 		{
 			MoveCameraRig ();
 		}
 
-		else if(Input.touchCount == 2)
+		else if(inputManager.IsZooming ())
 		{
 			PinchToZoom ();
 		}
@@ -58,9 +65,8 @@ public class CameraController : MonoBehaviour {
 
 	private void MoveCameraRig()
 	{
-		Touch touch = Input.GetTouch (0);
+		Vector3 movement = inputManager.MovingRange () * cameraSpeed * Time.deltaTime;
 
-		Vector3 movement = touch.deltaPosition * cameraSpeed * Time.deltaTime;
 		if(!invertControls)
 		{
 			movement.y *= -1;
@@ -74,18 +80,7 @@ public class CameraController : MonoBehaviour {
 
 	private void PinchToZoom()
 	{
-		Touch touchZero = Input.GetTouch(0);
-		Touch touchOne = Input.GetTouch(1);
-
-		Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
-		Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
-
-		float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-		float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
-
-		float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
-
-		m_camera.orthographicSize += deltaMagnitudeDiff * zoomSpeed * Time.deltaTime;
+		inputManager.Zoom (m_camera, zoomSpeed);
 
 		m_camera.orthographicSize = Mathf.Max (m_camera.orthographicSize, minOrtographicSize);
 		m_camera.orthographicSize = Mathf.Min (m_camera.orthographicSize, maxOrtographicSize);
