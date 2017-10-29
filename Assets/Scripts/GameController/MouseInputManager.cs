@@ -14,7 +14,6 @@ public class MouseInputManager : InputManager {
 
 	public override bool IsZooming ()
 	{
-		Debug.Log (Input.GetAxisRaw ("Mouse ScrollWheel"));
 		return Input.GetAxisRaw ("Mouse ScrollWheel") != 0;
 	}
 

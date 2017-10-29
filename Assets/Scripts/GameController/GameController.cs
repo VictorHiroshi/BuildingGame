@@ -9,6 +9,8 @@ public class GameController : MonoBehaviour {
 	public bool touchInput = true;
 	public static GameController instance;
 
+	private int coins = 0;
+
 	private CameraController cameraScript;
 	private ButtonsCanvasController buttonCanvas;
 	private InputManager inputManager;
@@ -76,10 +78,12 @@ public class GameController : MonoBehaviour {
 
 		GameObject instance = Instantiate (building, clickPosition, Quaternion.identity);
 
-		StartCoroutine (PositionNewBuilding (instance));
+		BuildingController buildingController = instance.GetComponent <BuildingController> ();
+
+		StartCoroutine (PositionNewBuilding (instance, buildingController));
 	}
 
-	private IEnumerator PositionNewBuilding(GameObject building)
+	private IEnumerator PositionNewBuilding(GameObject building, BuildingController buildingController)
 	{
 		while(Input.GetMouseButton (0))
 		{
@@ -92,7 +96,9 @@ public class GameController : MonoBehaviour {
 
 			yield return null;
 		}
-			
+
+		buildingController.Build ();
+
 		cameraScript.SetCanMoveTo (true);
 		buttonCanvas.Show ();
 	}
