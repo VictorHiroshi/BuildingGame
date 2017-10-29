@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum BuildingType {Houses, Factory, Mall, Park, Farm};
 
@@ -9,6 +10,8 @@ public class GameController : MonoBehaviour {
 	public bool touchInput = true;
 	public static GameController instance;
 	public int[] costsPerButton;
+	public Text userName;
+	public Text coinCount;
 
 	private int wallet = 30;
 
@@ -65,7 +68,8 @@ public class GameController : MonoBehaviour {
 
 	void Start()
 	{
-		//buttonCanvas.CheckButtons (wallet);
+		buttonCanvas.CheckButtons (wallet);
+		coinCount.text = wallet.ToString ();
 	}
 
 	public void BuildNew(GameObject building)
@@ -93,12 +97,14 @@ public class GameController : MonoBehaviour {
 	{
 		wallet -= coins;
 		buttonCanvas.CheckButtons (wallet);
+		coinCount.text = wallet.ToString ();
 	}
 
 	public void Receive(int coins)
 	{
 		wallet += coins;
 		buttonCanvas.CheckButtons (wallet);
+		coinCount.text = wallet.ToString ();
 	}
 
 	private IEnumerator PositionNewBuilding(GameObject building, BuildingController buildingController)
