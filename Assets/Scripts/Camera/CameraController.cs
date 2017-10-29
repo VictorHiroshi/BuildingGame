@@ -8,18 +8,11 @@ public class Boundary {
 	public float xMax;
 	public float yMin;
 	public float yMax;
-
-	public void IncrementBoundary(float value)
-	{
-		xMin -= value*2;
-		xMax += value*2;
-		yMin -= value;
-		yMax += value;
-	}
 }
 
 public class CameraController : MonoBehaviour {
 
+	public bool invertControls = false;
 	public float cameraSpeed = 2.0f;
 	public float zoomSpeed = 0.5f;
 	public float maxOrtographicSize = 5.5f;
@@ -41,13 +34,37 @@ public class CameraController : MonoBehaviour {
 
 	void Update()
 	{
-		if(Input.touchCount == 2)
+		if(Input.touchCount == 1)
+		{
+			MoveCameraRig ();
+		}
+
+		else if(Input.touchCount == 2)
 		{
 			PinchToZoom ();
 		}
 	}
 
-	public void PinchToZoom()
+	private void MoveCameraRig()
+	{
+		Touch touch = Input.GetTouch (0);
+
+		Vector3 movement = touch.deltaPosition * cameraSpeed * Time.deltaTime;
+		if(invertControls)
+		{
+			movement.x *= -1;
+		}
+		else 
+		{
+			movement.y *= -1;
+		}
+
+		transform.position += movement;
+
+		CheckBoundaries ();
+	}
+
+	private void PinchToZoom()
 	{
 		Touch touchZero = Input.GetTouch(0);
 		Touch touchOne = Input.GetTouch(1);

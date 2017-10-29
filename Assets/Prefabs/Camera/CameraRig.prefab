@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1772567929701558}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.11, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4276433254281564}
@@ -125,15 +125,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee35af27b2b08140b1f2200bda20a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invertControls: 0
   cameraSpeed: 0.5
   zoomSpeed: 0.5
-  maxOrtographicSize: 10
-  minOrtographicSize: 3
+  maxOrtographicSize: 15
+  minOrtographicSize: 2.5
   cameraBoundaries:
-    xMin: 0
-    xMax: 0
-    yMin: 0
-    yMax: 0
+    xMin: -10
+    xMax: 10
+    yMin: -10
+    yMax: 10
 --- !u!124 &124089413363368578
 Behaviour:
   m_ObjectHideFlags: 1
