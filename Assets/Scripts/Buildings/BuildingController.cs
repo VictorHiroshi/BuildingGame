@@ -11,6 +11,7 @@ public class BuildingController : MonoBehaviour {
 	public int cost = 1;
 	public SpriteRenderer cantBuildImage;
 	public Slider buildingProgressBar;
+	public ParticleSystem explosion;
 
 	private bool canBuild;
 	private IEnumerator routine;
@@ -73,6 +74,8 @@ public class BuildingController : MonoBehaviour {
 
 		}
 
+		StartCoroutine (FinishBuilding());
+
 		buildingProgressBar.gameObject.SetActive (false);
 
 		routine = GenerateMoney ();
@@ -92,11 +95,22 @@ public class BuildingController : MonoBehaviour {
 				timeCount -= timeToGenerateCoins;
 				GameController.instance.Receive (income);
 
+				explosion.Play ();
+
 				StartCoroutine (SpawnFlyingCoins (income));
 			}
 
 			yield return null;
 		}
+	}
+
+	private IEnumerator FinishBuilding()
+	{
+		gameObject.transform.localScale += (Vector3.one * 0.2f);
+
+		yield return new WaitForSeconds (0.2f);
+		
+		gameObject.transform.localScale -= (Vector3.one * 0.2f);
 	}
 
 	private IEnumerator SpawnFlyingCoins(int count)
