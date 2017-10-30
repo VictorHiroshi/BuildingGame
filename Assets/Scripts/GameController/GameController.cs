@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
 	public float delayBetweenCoinSpawn = 0.2f;
 	public GameObject coinPrefab;
 
-	private int wallet = 30;
+	private int wallet = 0;
 	private bool isPaused;
 
 	private CameraController cameraScript;
@@ -25,7 +25,6 @@ public class GameController : MonoBehaviour {
 
 	void Awake()
 	{
-
 		if(instance == null)
 		{
 			instance = this;
@@ -34,14 +33,6 @@ public class GameController : MonoBehaviour {
 		{
 			Destroy (this); 
 		}
-		/*if(Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer)
-		{
-			inputManager = new TouchInputManager ();
-		}
-		else
-		{
-			inputManager = new MouseInputManager ();
-		}*/
 
 		if(touchInput)
 		{
@@ -64,19 +55,18 @@ public class GameController : MonoBehaviour {
 
 		buttonCanvas = GameObject.FindObjectOfType<ButtonsCanvasController> ();
 
+		userName.text = " ";
+		coinCount.text = " ";
+
 		if(buttonCanvas == null)
 		{
 			Debug.LogError ("No button canvas controller found in scene");
 			Debug.Break ();
 		}
 
-		isPaused = false;
-	}
+		buttonCanvas.Hide ();
 
-	void Start()
-	{
-		buttonCanvas.CheckButtons (wallet);
-		coinCount.text = wallet.ToString ();
+		isPaused = false;
 	}
 
 	void Update () {
@@ -84,6 +74,13 @@ public class GameController : MonoBehaviour {
 		{
 			Application.Quit();
 		}
+	}
+
+	public void Logged(string nickName, int coins)
+	{
+		buttonCanvas.Show ();
+		userName.text = nickName;
+		Receive (coins);
 	}
 
 	public void Pause()

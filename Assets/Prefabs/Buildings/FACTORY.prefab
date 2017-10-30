@@ -87,8 +87,8 @@ GameObject:
   - component: {fileID: 4180180596088350}
   - component: {fileID: 212697040949363686}
   - component: {fileID: 61919099340651782}
-  - component: {fileID: 114398534869850220}
   - component: {fileID: 50040073693976258}
+  - component: {fileID: 114398534869850220}
   m_Layer: 0
   m_Name: FACTORY
   m_TagString: Building
@@ -206,7 +206,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &61919099340651782
 BoxCollider2D:
@@ -308,10 +308,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30096b615ed715d4dab3842550f131cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToGenerateCoins: 45
-  timeToBuild: 60
-  income: 10
-  cost: 2
+  timeToGenerateCoins: 10
+  timeToBuild: 15
+  income: 1
+  cost: 10
   cantBuildImage: {fileID: 212112563505674568}
   buildingProgressBar: {fileID: 114661974949672876}
   explosion: {fileID: 198887190561056512}

@@ -34,3 +34,9 @@ public class GameData {
 	public Profile profile;
 	public string token;
 }
+
+[Serializable]
+public class AdditionalData {
+	public string nickname;
+	public int money;
+}

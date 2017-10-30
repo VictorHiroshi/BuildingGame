@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Runtime.Remoting.Messaging;
 
 public class LoginScript : MonoBehaviour {
 
@@ -16,11 +17,10 @@ public class LoginScript : MonoBehaviour {
 	private Login loginData;
 	private GameData gameData;
 	private bool logged;
-	private string errorMessage;
 
 	void Start()
 	{
-		blinkTextDelay = new WaitForSeconds (0.5f);
+		blinkTextDelay = new WaitForSeconds (0.6f);
 	}
 
 	public void ValidateLogin()
@@ -38,7 +38,13 @@ public class LoginScript : MonoBehaviour {
 		loginData.username = userNameField.text;
 		loginData.SetPasswordToHashSHA256 (passwordField.text);
 
-		yield return StartCoroutine (POST (loginData));
+		yield return StartCoroutine (FetchGameData ());
+
+		if(logged)
+		{
+			logged = false;
+			yield return StartCoroutine (FetchAdditionalData ());
+		}
 
 		StopCoroutine (messageRoutine);
 
@@ -46,15 +52,9 @@ public class LoginScript : MonoBehaviour {
 		{
 			messageText.text = "Succeded";
 
-			GameController.instance.userName.text = gameData.profile.name;
-
 			yield return new WaitForSeconds (2f);
 
 			Destroy (gameObject);
-		}
-		else
-		{
-			messageText.text = errorMessage;
 		}
 	}
 
@@ -71,7 +71,7 @@ public class LoginScript : MonoBehaviour {
 		}
 	}
 
-	private IEnumerator POST(Login loginData)
+	private IEnumerator FetchGameData()
 	{
 		WWWForm form = new WWWForm ();
 
@@ -89,7 +89,36 @@ public class LoginScript : MonoBehaviour {
 		}
 		else
 		{
-			errorMessage = www.error;
+			messageText.text = www.error;
+		}
+	}
+
+	private IEnumerator FetchAdditionalData()
+	{
+		Dictionary<string, string> headers = new Dictionary<string, string> ();
+
+		headers.Add ("X-Authorization", gameData.token);
+
+		WWW www = new WWW (url + "/status", null, headers);
+
+		yield return www;
+
+		if(www.error == null)
+		{
+			//set user nickname and coins.
+			//GameController.instance.userName.text = gameData.profile.name;
+			AdditionalData data = JsonUtility.FromJson<AdditionalData> (www.text);
+
+			Debug.Log (www.text);
+			Debug.Log (data.nickname + " " + data.money);
+
+			logged = true;
+
+			GameController.instance.Logged (data.nickname, data.money);
+		}
+		else
+		{
+			messageText.text = www.error;
 		}
 	}
 }

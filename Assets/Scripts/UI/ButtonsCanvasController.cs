@@ -13,12 +13,12 @@ public class BuildingCost
 
 public class ButtonsCanvasController : MonoBehaviour {
 
+	public Canvas BuildingButtonsCanvasObject;
+
 	private List <BuildingCost> buildings;
-	private Canvas canvasObject;
 
 	void Awake()
 	{
-		canvasObject = GetComponent <Canvas> ();
 		buildings = new List<BuildingCost>();
 
 		BuildingCost instanceBC;
@@ -36,12 +36,12 @@ public class ButtonsCanvasController : MonoBehaviour {
 
 	public void Hide()
 	{
-		canvasObject.enabled = false;
+		BuildingButtonsCanvasObject.enabled = false;
 	}
 
 	public void Show()
 	{
-		canvasObject.enabled = true;
+		BuildingButtonsCanvasObject.enabled = true;
 	}
 
 	public void CheckButtons(int availableCoins)

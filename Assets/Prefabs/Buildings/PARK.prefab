@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4236743842462962}
   - component: {fileID: 212108085276657656}
   - component: {fileID: 61789198216371048}
-  - component: {fileID: 114099589854595938}
   - component: {fileID: 50025570308375934}
+  - component: {fileID: 114099589854595938}
   m_Layer: 0
   m_Name: PARK
   m_TagString: Building
@@ -206,7 +206,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &61789198216371048
 BoxCollider2D:
@@ -247,7 +247,7 @@ MonoBehaviour:
   timeToGenerateCoins: 60
   timeToBuild: 90
   income: 20
-  cost: 4
+  cost: 30
   cantBuildImage: {fileID: 212359313358058610}
   buildingProgressBar: {fileID: 114287171020419990}
   explosion: {fileID: 198032312559829870}

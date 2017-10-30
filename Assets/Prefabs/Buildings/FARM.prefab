@@ -36,8 +36,8 @@ GameObject:
   - component: {fileID: 4160418705130352}
   - component: {fileID: 212456148437998464}
   - component: {fileID: 61495268557333304}
-  - component: {fileID: 114694091697884174}
   - component: {fileID: 50271773064828152}
+  - component: {fileID: 114694091697884174}
   m_Layer: 0
   m_Name: FARM
   m_TagString: Building
@@ -206,7 +206,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &61495268557333304
 BoxCollider2D:
@@ -310,8 +310,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToGenerateCoins: 30
   timeToBuild: 120
-  income: 20
-  cost: 5
+  income: 15
+  cost: 35
   cantBuildImage: {fileID: 212008998647677258}
   buildingProgressBar: {fileID: 114920287839524050}
   explosion: {fileID: 198687835127635318}

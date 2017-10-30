@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4885375773669670}
   - component: {fileID: 212689538648028692}
   - component: {fileID: 61285689068195222}
-  - component: {fileID: 114695313288286270}
   - component: {fileID: 50141585750476574}
+  - component: {fileID: 114695313288286270}
   m_Layer: 0
   m_Name: HOUSES
   m_TagString: Building
@@ -206,7 +206,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &61285689068195222
 BoxCollider2D:
@@ -337,8 +337,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToGenerateCoins: 15
   timeToBuild: 15
-  income: 2
-  cost: 1
+  income: 1
+  cost: 5
   cantBuildImage: {fileID: 212519171982190608}
   buildingProgressBar: {fileID: 114045876659949932}
   explosion: {fileID: 198244869177898360}

@@ -90,8 +90,8 @@ GameObject:
   - component: {fileID: 4410027642509312}
   - component: {fileID: 212606463403161372}
   - component: {fileID: 61554168348242448}
-  - component: {fileID: 114067006475186088}
   - component: {fileID: 50985290735264270}
+  - component: {fileID: 114067006475186088}
   m_Layer: 0
   m_Name: MALL
   m_TagString: Building
@@ -206,7 +206,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &61554168348242448
 BoxCollider2D:
@@ -220,7 +220,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.75}
+  m_Offset: {x: 0, y: -0.6255032}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -231,7 +231,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1}
+  m_Size: {x: 2.5, y: 1.2489936}
   m_EdgeRadius: 0
 --- !u!114 &114039156099710026
 MonoBehaviour:
@@ -265,10 +265,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30096b615ed715d4dab3842550f131cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToGenerateCoins: 30
-  timeToBuild: 90
-  income: 10
-  cost: 3
+  timeToGenerateCoins: 20
+  timeToBuild: 30
+  income: 3
+  cost: 15
   cantBuildImage: {fileID: 212431633403889166}
   buildingProgressBar: {fileID: 114588795778228070}
   explosion: {fileID: 198441582788767214}
