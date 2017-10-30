@@ -9,9 +9,12 @@ public class GameController : MonoBehaviour {
 
 	public bool touchInput = true;
 	public static GameController instance;
-	public int[] costsPerButton;
 	public Text userName;
 	public Text coinCount;
+	public Image coinTarget;
+	public float coinSpeed = 1.5f;
+	public float delayBetweenCoinSpawn = 0.2f;
+	public GameObject coinPrefab;
 
 	private int wallet = 30;
 	private bool isPaused;
@@ -130,6 +133,11 @@ public class GameController : MonoBehaviour {
 		wallet += coins;
 		buttonCanvas.CheckButtons (wallet);
 		coinCount.text = wallet.ToString ();
+	}
+
+	public Vector3 GetCoinPosition()
+	{
+		return Camera.main.ScreenToWorldPoint (coinTarget.transform.position);
 	}
 
 	private IEnumerator PositionNewBuilding(GameObject building, BuildingController buildingController)

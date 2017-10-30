@@ -46,7 +46,6 @@ public class ButtonsCanvasController : MonoBehaviour {
 
 	public void CheckButtons(int availableCoins)
 	{
-		Debug.Log ("Coins: " + availableCoins);
 		foreach(BuildingCost building in buildings)
 		{
 			if(building.cost > availableCoins)

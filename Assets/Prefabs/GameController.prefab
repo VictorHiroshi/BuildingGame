@@ -51,7 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82571a4363fd6b043aaa8d50d686407b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchInput: 0
-  costsPerButton: 
+  touchInput: 1
   userName: {fileID: 0}
   coinCount: {fileID: 0}
+  coinTarget: {fileID: 0}
+  coinSpeed: 2.5
+  coinPrefab: {fileID: 1234374522288970, guid: b4931e43883cca94cbf547472d4f55b1, type: 2}

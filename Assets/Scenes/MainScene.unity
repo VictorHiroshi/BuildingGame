@@ -382,8 +382,13 @@ Prefab:
       objectReference: {fileID: 1605171395}
     - target: {fileID: 114098231612469346, guid: 3c10458eeda16ce4eba5388944b344f9,
         type: 2}
-      propertyPath: touchInput
-      value: 1
+      propertyPath: coinTarget
+      value: 
+      objectReference: {fileID: 1781650578}
+    - target: {fileID: 114098231612469346, guid: 3c10458eeda16ce4eba5388944b344f9,
+        type: 2}
+      propertyPath: coinSpeed
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3c10458eeda16ce4eba5388944b344f9, type: 2}

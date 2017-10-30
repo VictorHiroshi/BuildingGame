@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30096b615ed715d4dab3842550f131cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToGenerateCoins: 30
+  timeToGenerateCoins: 15
   timeToBuild: 15
   income: 2
   cost: 1

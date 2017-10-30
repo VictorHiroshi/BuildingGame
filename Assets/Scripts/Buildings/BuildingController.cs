@@ -91,11 +91,23 @@ public class BuildingController : MonoBehaviour {
 			{
 				timeCount -= timeToGenerateCoins;
 				GameController.instance.Receive (income);
-				Debug.Log ("Receive: " + income);
 
+				StartCoroutine (SpawnFlyingCoins (income));
 			}
 
 			yield return null;
 		}
+	}
+
+	private IEnumerator SpawnFlyingCoins(int count)
+	{
+		WaitForSeconds delay = new WaitForSeconds (GameController.instance.delayBetweenCoinSpawn);
+
+		for(int spawned = 0; spawned<count; spawned++)
+		{
+			Instantiate (GameController.instance.coinPrefab);
+			yield return delay;
+		}
+
 	}
 }
