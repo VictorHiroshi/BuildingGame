@@ -93,7 +93,6 @@ public class BuildingController : MonoBehaviour {
 			if(timeCount > timeToGenerateCoins)
 			{
 				timeCount -= timeToGenerateCoins;
-				GameController.instance.Receive (income);
 
 				explosion.Play ();
 

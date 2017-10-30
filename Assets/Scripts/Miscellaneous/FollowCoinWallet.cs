@@ -15,6 +15,9 @@ public class FollowCoinWallet : MonoBehaviour {
 		if ((transform.position - target).magnitude < float.Epsilon)
 		{
 			// TODO: Play coin sound.
+
+			GameController.instance.Receive (1);
+
 			Destroy (gameObject);
 		}
 	}
