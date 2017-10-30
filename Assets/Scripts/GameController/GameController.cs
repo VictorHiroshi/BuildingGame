@@ -78,6 +78,24 @@ public class GameController : MonoBehaviour {
 		coinCount.text = wallet.ToString ();
 	}
 
+	public void Pause()
+	{
+		isPaused = !isPaused;
+
+		if (isPaused) 
+		{
+			buttonCanvas.Hide ();
+
+			Time.timeScale = 0;
+		} 
+		else
+		{
+			buttonCanvas.Show ();
+
+			Time.timeScale = 1;
+		}
+	}
+
 	public void BuildNew(GameObject building)
 	{
 		cameraScript.SetCanMoveTo (false);
@@ -97,28 +115,6 @@ public class GameController : MonoBehaviour {
 		BuildingController buildingController = instance.GetComponent <BuildingController> ();
 
 		StartCoroutine (PositionNewBuilding (instance, buildingController));
-	}
-
-	public void Pause(Image buttonImage)
-	{
-		isPaused = !isPaused;
-
-		if (isPaused) 
-		{
-			buttonImage.color = Color.cyan;
-
-			buttonCanvas.Hide ();
-
-			Time.timeScale = 0;
-		} 
-		else
-		{
-			buttonImage.color = Color.white;
-
-			buttonCanvas.Show ();
-
-			Time.timeScale = 1;
-		}
 	}
 
 	public void Spend(int coins)
