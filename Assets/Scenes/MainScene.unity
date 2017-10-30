@@ -239,6 +239,16 @@ Prefab:
       propertyPath: m_LocalPosition.x
       value: 0.000015258789
       objectReference: {fileID: 0}
+    - target: {fileID: 114660362682805596, guid: 4e13eb99bfe3ec040b61bb6a957bc992,
+        type: 2}
+      propertyPath: m_HideMobileInput
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114653267457864052, guid: 4e13eb99bfe3ec040b61bb6a957bc992,
+        type: 2}
+      propertyPath: m_HideMobileInput
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4e13eb99bfe3ec040b61bb6a957bc992, type: 2}
   m_IsPrefabParent: 0
@@ -645,11 +655,6 @@ Prefab:
       propertyPath: coinTarget
       value: 
       objectReference: {fileID: 1781650578}
-    - target: {fileID: 114098231612469346, guid: 3c10458eeda16ce4eba5388944b344f9,
-        type: 2}
-      propertyPath: coinSpeed
-      value: 0.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3c10458eeda16ce4eba5388944b344f9, type: 2}
   m_IsPrefabParent: 0

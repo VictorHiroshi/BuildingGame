@@ -11,8 +11,7 @@ public class LoginScript : MonoBehaviour {
 
 	private WaitForSeconds blinkTextDelay;
 
-	private string userName;
-	private string password;
+	private Login loginData;
 
 	void Start()
 	{
@@ -21,6 +20,7 @@ public class LoginScript : MonoBehaviour {
 
 	public void ValidateLogin()
 	{
+		loginData = new Login ();
 		StartCoroutine (CheckData ());
 	}
 
@@ -29,14 +29,16 @@ public class LoginScript : MonoBehaviour {
 		IEnumerator messageRoutine = ShowDots ();
 		StartCoroutine (messageRoutine);
 
-		userName = userNameField.text;
-		password = passwordField.text;
-
-		yield return new WaitForSeconds (6f);
+		loginData.username = userNameField.text;
+		loginData.SetPasswordToHashSHA256 (passwordField.text);
 
 		StopCoroutine (messageRoutine);
 
-		messageText.text = userName + " - " + password;
+		messageText.text = loginData.username + " - " + loginData.password;
+
+		yield return new WaitForSeconds (3f);
+
+		/*Destroy (gameObject);*/
 	}
 
 	private IEnumerator ShowDots()

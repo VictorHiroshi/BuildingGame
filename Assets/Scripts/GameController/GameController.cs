@@ -78,6 +78,13 @@ public class GameController : MonoBehaviour {
 		coinCount.text = wallet.ToString ();
 	}
 
+	void Update () {
+		if (Input.GetKeyUp(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
+	}
+
 	public void Pause()
 	{
 		isPaused = !isPaused;
