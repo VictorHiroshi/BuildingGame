@@ -105,7 +105,7 @@ public class BuildingController : MonoBehaviour {
 
 		for(int spawned = 0; spawned<count; spawned++)
 		{
-			Instantiate (GameController.instance.coinPrefab);
+			Instantiate (GameController.instance.coinPrefab, gameObject.transform.position, Quaternion.identity);
 			yield return delay;
 		}
 

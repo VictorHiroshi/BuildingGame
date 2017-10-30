@@ -118,6 +118,48 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 926123502}
   m_Script: {fileID: 11500000, guid: 82571a4363fd6b043aaa8d50d686407b, type: 3}
+--- !u!1001 &264445520
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4124004069451884, guid: b4931e43883cca94cbf547472d4f55b1, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124004069451884, guid: b4931e43883cca94cbf547472d4f55b1, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124004069451884, guid: b4931e43883cca94cbf547472d4f55b1, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124004069451884, guid: b4931e43883cca94cbf547472d4f55b1, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124004069451884, guid: b4931e43883cca94cbf547472d4f55b1, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124004069451884, guid: b4931e43883cca94cbf547472d4f55b1, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124004069451884, guid: b4931e43883cca94cbf547472d4f55b1, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124004069451884, guid: b4931e43883cca94cbf547472d4f55b1, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b4931e43883cca94cbf547472d4f55b1, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &399864102
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,7 +430,7 @@ Prefab:
     - target: {fileID: 114098231612469346, guid: 3c10458eeda16ce4eba5388944b344f9,
         type: 2}
       propertyPath: coinSpeed
-      value: 1.5
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3c10458eeda16ce4eba5388944b344f9, type: 2}
@@ -900,6 +942,7 @@ GameObject:
   - component: {fileID: 2059081553}
   - component: {fileID: 2059081552}
   - component: {fileID: 2059081551}
+  - component: {fileID: 2059081554}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -942,7 +985,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -970,6 +1013,17 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 2059081552}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2059081554}
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1010,3 +1064,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2059081549}
+--- !u!114 &2059081554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2059081549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f9773a855016f46b522b05d370d668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonImage: {fileID: 2059081552}
+  spriteNotClicked: {fileID: 21300000, guid: 46038a0e482c65f47a83575feb444736, type: 3}
+  spriteClicked: {fileID: 21300000, guid: f390046178f53184ca1ee71ba509204b, type: 3}
