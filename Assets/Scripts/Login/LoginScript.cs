@@ -11,6 +11,9 @@ public class LoginScript : MonoBehaviour {
 	public InputField userNameField;
 	public InputField passwordField;
 	public Text messageText;
+	public Button confirmButton;
+	public GameObject rayCastBlocker;
+	public GameObject dataPanel;
 
 	private WaitForSeconds blinkTextDelay;
 
@@ -25,6 +28,7 @@ public class LoginScript : MonoBehaviour {
 
 	public void ValidateLogin()
 	{
+		confirmButton.interactable = false;
 		loginData = new Login ();
 		StartCoroutine (CheckData ());
 	}
@@ -54,7 +58,12 @@ public class LoginScript : MonoBehaviour {
 
 			yield return new WaitForSeconds (2f);
 
-			Destroy (gameObject);
+			Destroy (rayCastBlocker);
+			Destroy (dataPanel);
+		}
+		else
+		{
+			confirmButton.interactable = true;
 		}
 	}
 
@@ -108,9 +117,6 @@ public class LoginScript : MonoBehaviour {
 			//set user nickname and coins.
 			//GameController.instance.userName.text = gameData.profile.name;
 			AdditionalData data = JsonUtility.FromJson<AdditionalData> (www.text);
-
-			Debug.Log (www.text);
-			Debug.Log (data.nickname + " " + data.money);
 
 			logged = true;
 

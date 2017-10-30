@@ -814,9 +814,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 707c0891ca194cd4ba7ba839713cdbe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  url: http://dev.pushstart.com.br/desafio/public/api
   userNameField: {fileID: 114660362682805596}
   passwordField: {fileID: 114653267457864052}
   messageText: {fileID: 114429358406803760}
+  confirmButton: {fileID: 114667132067094956}
+  rayCastBlocker: {fileID: 1966511199960254}
+  dataPanel: {fileID: 1705406928814356}
 --- !u!114 &114744865728766028
 MonoBehaviour:
   m_ObjectHideFlags: 1
