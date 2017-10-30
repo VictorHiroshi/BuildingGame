@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using UnityEngine;
 
 public class Login {
 
@@ -20,4 +21,16 @@ public class Login {
 
 		password = hashString;
 	}
+}
+
+[Serializable]
+public class Profile {
+	public string name;
+	public string type;
+}
+
+[Serializable]
+public class GameData {
+	public Profile profile;
+	public string token;
 }

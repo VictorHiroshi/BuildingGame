@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour {
 
 	void Awake()
 	{
+
 		if(instance == null)
 		{
 			instance = this;

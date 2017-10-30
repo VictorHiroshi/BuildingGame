@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class LoginScript : MonoBehaviour {
 
+	public string url = "http://dev.pushstart.com.br/desafio/public/api";
+
 	public InputField userNameField;
 	public InputField passwordField;
 	public Text messageText;
@@ -12,6 +14,9 @@ public class LoginScript : MonoBehaviour {
 	private WaitForSeconds blinkTextDelay;
 
 	private Login loginData;
+	private GameData gameData;
+	private bool logged;
+	private string errorMessage;
 
 	void Start()
 	{
@@ -29,16 +34,28 @@ public class LoginScript : MonoBehaviour {
 		IEnumerator messageRoutine = ShowDots ();
 		StartCoroutine (messageRoutine);
 
+		logged = false;
 		loginData.username = userNameField.text;
 		loginData.SetPasswordToHashSHA256 (passwordField.text);
 
+		yield return StartCoroutine (POST (loginData));
+
 		StopCoroutine (messageRoutine);
 
-		messageText.text = loginData.username + " - " + loginData.password;
+		if(logged)
+		{
+			messageText.text = "Succeded";
 
-		yield return new WaitForSeconds (3f);
+			GameController.instance.userName.text = gameData.profile.name;
 
-		/*Destroy (gameObject);*/
+			yield return new WaitForSeconds (2f);
+
+			Destroy (gameObject);
+		}
+		else
+		{
+			messageText.text = errorMessage;
+		}
 	}
 
 	private IEnumerator ShowDots()
@@ -51,6 +68,28 @@ public class LoginScript : MonoBehaviour {
 			index = (index + 1) % 3;
 			messageText.text = dots [index];
 			yield return blinkTextDelay;
+		}
+	}
+
+	private IEnumerator POST(Login loginData)
+	{
+		WWWForm form = new WWWForm ();
+
+		form.AddField ("username", loginData.username);
+		form.AddField ("password", loginData.password);
+
+		WWW www = new WWW (url + "/auth/login", form);
+
+		yield return www;
+
+		if(www.error == null)
+		{
+			gameData = JsonUtility.FromJson<GameData> (www.text);
+			logged = true;
+		}
+		else
+		{
+			errorMessage = www.error;
 		}
 	}
 }
