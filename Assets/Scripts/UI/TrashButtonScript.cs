@@ -25,6 +25,13 @@ public class TrashButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
+		StopAllCoroutines ();
+		StartCoroutine (DelayButtonExit ());
+	}
+
+	private IEnumerator DelayButtonExit()
+	{
+		yield return null;
 		buttonImage.color = naturalColor;
 		GameController.instance.cancelPlacement = false;
 	}
