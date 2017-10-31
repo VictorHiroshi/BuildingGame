@@ -1,16 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class InfoButtonScript : MonoBehaviour {
+public class InfoButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+	public Color clickedColor;
 
-	// Use this for initialization
-	void Start () {
-		
+	private Image buttonImage;
+	private Color naturalColor;
+
+	void Awake()
+	{
+		buttonImage = GetComponent <Image> ();
+		naturalColor = buttonImage.color;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void OnPointerEnter(PointerEventData eventData)
+	{
+		buttonImage.color = clickedColor;
+		GameController.instance.showInfo = true;
+	}
+
+	public void OnPointerExit(PointerEventData eventData)
+	{
+		buttonImage.color = naturalColor;
+		GameController.instance.showInfo = false;
 	}
 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BuildingController : MonoBehaviour {
 
+	public string name;
 	public float timeToGenerateCoins = 30f;
 	public float timeToBuild = 15f;
 	public int income = 10;

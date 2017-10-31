@@ -1,16 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class TrashButtonScript : MonoBehaviour {
+public class TrashButtonScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 
-	// Use this for initialization
-	void Start () {
-		
+	public Color clickedColor;
+
+	private Image buttonImage;
+	private Color naturalColor;
+
+	void Awake()
+	{
+		buttonImage = GetComponent <Image> ();
+		naturalColor = buttonImage.color;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	public void OnPointerEnter(PointerEventData eventData)
+	{
+		buttonImage.color = clickedColor;
+		GameController.instance.cancelPlacement = true;
+	}
+
+	public void OnPointerExit(PointerEventData eventData)
+	{
+		buttonImage.color = naturalColor;
+		GameController.instance.cancelPlacement = false;
 	}
 }
+

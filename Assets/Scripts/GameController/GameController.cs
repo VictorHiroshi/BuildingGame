@@ -12,11 +12,15 @@ public class GameController : MonoBehaviour {
 	public Text userName;
 	public Text coinCount;
 	public Image coinTarget;
+	public InfoPanel infoPanel;
 	public float coinSpeed = 1.5f;
 	public float delayBetweenCoinSpawn = 0.2f;
 	public GameObject coinPrefab;
 	public AudioSource coinAudioSource;
 	public AudioSource musicAudioSource;
+
+	[HideInInspector] public bool showInfo;
+	[HideInInspector] public bool cancelPlacement;
 
 	private int wallet = 0;
 	private bool isPaused;
@@ -65,6 +69,8 @@ public class GameController : MonoBehaviour {
 			Debug.LogError ("No button canvas controller found in scene");
 			Debug.Break ();
 		}
+
+		infoPanel.HidePanel ();
 
 		isPaused = false;
 	}
@@ -130,6 +136,9 @@ public class GameController : MonoBehaviour {
 
 		BuildingController buildingController = instance.GetComponent <BuildingController> ();
 
+		cancelPlacement = false;
+		showInfo = false;
+
 		StartCoroutine (PositionNewBuilding (instance, buildingController));
 	}
 
@@ -170,7 +179,20 @@ public class GameController : MonoBehaviour {
 			yield return null;
 		}
 
-		buildingController.Build ();
+		if(showInfo)
+		{
+			infoPanel.DisplayInfo (buildingController);
+
+			Destroy (buildingController.gameObject);
+		}
+		else if(cancelPlacement)
+		{
+			Destroy (buildingController.gameObject);
+		}
+		else
+		{
+			buildingController.Build ();
+		}
 
 		cameraScript.SetCanMoveTo (true);
 		buttonCanvas.PlacingBuildingPanel (false);

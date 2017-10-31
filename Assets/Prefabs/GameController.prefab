@@ -219,8 +219,11 @@ MonoBehaviour:
   userName: {fileID: 0}
   coinCount: {fileID: 0}
   coinTarget: {fileID: 0}
+  infoPanel: {fileID: 0}
   coinSpeed: 0.8
   delayBetweenCoinSpawn: 0.2
   coinPrefab: {fileID: 1234374522288970, guid: b4931e43883cca94cbf547472d4f55b1, type: 2}
   coinAudioSource: {fileID: 82458462362351472}
   musicAudioSource: {fileID: 82559120158214682}
+  showInfo: 0
+  cancelPlacement: 0
