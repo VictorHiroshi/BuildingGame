@@ -3,34 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-[System.Serializable]
-public class BuildingCost
-{
-	public GameObject button;
-	public int cost;
-}
-
 public class ButtonsCanvasController : MonoBehaviour {
 
 	public Canvas BuildingButtonsCanvasObject;
 
-	private List <BuildingCost> buildings;
+	public Color buttonAllowedColor;
+	public Color buttonForbidenColor;
+
+	private List <ButtonClick> buttons;
 
 	void Awake()
 	{
-		buildings = new List<BuildingCost>();
-
-		BuildingCost instanceBC;
-
+		buttons = new List<ButtonClick> ();
 		foreach(ButtonClick buttonScript in GetComponentsInChildren <ButtonClick> ())
 		{
-			instanceBC = new BuildingCost ();
-
-			instanceBC.button = buttonScript.gameObject;
-			instanceBC.cost = buttonScript.GetButtonCost ();
-
-			buildings.Add (instanceBC);
+			buttons.Add (buttonScript);
 		}
 	}
 
@@ -46,15 +33,15 @@ public class ButtonsCanvasController : MonoBehaviour {
 
 	public void CheckButtons(int availableCoins)
 	{
-		foreach(BuildingCost building in buildings)
+		foreach(ButtonClick button in buttons)
 		{
-			if(building.cost > availableCoins)
+			if(button.GetButtonCost() > availableCoins)
 			{
-				building.button.SetActive (false);
+				button.SetButtonTo (false, buttonForbidenColor);
 			}
 			else
 			{
-				building.button.SetActive (true);
+				button.SetButtonTo (true, buttonAllowedColor);
 			}
 		}
 	}

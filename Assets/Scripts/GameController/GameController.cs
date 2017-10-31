@@ -66,8 +66,6 @@ public class GameController : MonoBehaviour {
 			Debug.Break ();
 		}
 
-		buttonCanvas.Hide ();
-
 		isPaused = false;
 	}
 
@@ -80,7 +78,6 @@ public class GameController : MonoBehaviour {
 
 	public void Logged(string nickName, int coins)
 	{
-		buttonCanvas.Show ();
 		userName.text = nickName;
 		Receive (coins);
 	}

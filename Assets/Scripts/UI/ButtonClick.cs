@@ -9,11 +9,22 @@ public class ButtonClick : MonoBehaviour, IPointerDownHandler{
 
 	public GameObject prefab;
 
+	private bool active;
+	private Image buttonImage;
+
+	void Awake()
+	{
+		active = false;
+		buttonImage = GetComponent <Image> ();
+	}
+
 	public void OnPointerDown(PointerEventData eventData)
 	{
-		if(eventData.button == PointerEventData.InputButton.Left)
+		if(active)
 		{
-			GameController.instance.BuildNew (prefab);
+			if (eventData.button == PointerEventData.InputButton.Left) {
+				GameController.instance.BuildNew (prefab);
+			}
 		}
 	}
 
@@ -22,4 +33,9 @@ public class ButtonClick : MonoBehaviour, IPointerDownHandler{
 		return prefab.GetComponent <BuildingController> ().cost;
 	}
 
+	public void SetButtonTo(bool value, Color newColor)
+	{
+		active = value;
+		buttonImage.color = newColor;
+	}
 }
