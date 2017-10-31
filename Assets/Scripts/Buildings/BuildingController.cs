@@ -24,7 +24,7 @@ public class BuildingController : MonoBehaviour {
 		canBuild = true;
 	}
 
-	public void OnTriggerEnter2D(Collider2D other)
+	public void OnTriggerStay2D(Collider2D other)
 	{
 		if(other.gameObject.tag == "Building")
 		{
@@ -32,6 +32,7 @@ public class BuildingController : MonoBehaviour {
 			cantBuildImage.enabled = true;
 		}
 	}
+
 
 	public void OnTriggerExit2D(Collider2D other)
 	{
