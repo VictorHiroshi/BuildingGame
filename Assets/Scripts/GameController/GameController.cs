@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour {
 	public float coinSpeed = 1.5f;
 	public float delayBetweenCoinSpawn = 0.2f;
 	public GameObject coinPrefab;
+	public AudioSource coinAudioSource;
+	public AudioSource musicAudioSource;
 
 	private int wallet = 0;
 	private bool isPaused;
@@ -101,6 +103,18 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
+	public void TurnMusic(bool value)
+	{
+		if(value)
+		{
+			musicAudioSource.Play ();
+		}
+		else
+		{
+			musicAudioSource.Stop ();
+		}
+	}
+
 	public void BuildNew(GameObject building)
 	{
 		cameraScript.SetCanMoveTo (false);
@@ -127,6 +141,8 @@ public class GameController : MonoBehaviour {
 		wallet -= coins;
 		buttonCanvas.CheckButtons (wallet);
 		coinCount.text = wallet.ToString ();
+
+		coinAudioSource.Play ();
 	}
 
 	public void Receive(int coins)
@@ -134,6 +150,8 @@ public class GameController : MonoBehaviour {
 		wallet += coins;
 		buttonCanvas.CheckButtons (wallet);
 		coinCount.text = wallet.ToString ();
+
+		coinAudioSource.Play ();
 	}
 
 	public Vector3 GetCoinPosition()
