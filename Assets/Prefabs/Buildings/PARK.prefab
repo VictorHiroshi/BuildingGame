@@ -247,7 +247,8 @@ MonoBehaviour:
   timeToGenerateCoins: 60
   timeToBuild: 90
   income: 20
-  cost: 30
+  cost: 50
+  buildingImage: {fileID: 212108085276657656}
   cantBuildImage: {fileID: 212359313358058610}
   buildingProgressBar: {fileID: 114287171020419990}
   explosion: {fileID: 198032312559829870}

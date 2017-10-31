@@ -310,8 +310,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToGenerateCoins: 10
   timeToBuild: 15
-  income: 1
+  income: 2
   cost: 10
+  buildingImage: {fileID: 212697040949363686}
   cantBuildImage: {fileID: 212112563505674568}
   buildingProgressBar: {fileID: 114661974949672876}
   explosion: {fileID: 198887190561056512}

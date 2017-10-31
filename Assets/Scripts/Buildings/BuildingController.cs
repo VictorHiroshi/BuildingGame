@@ -9,6 +9,7 @@ public class BuildingController : MonoBehaviour {
 	public float timeToBuild = 15f;
 	public int income = 10;
 	public int cost = 1;
+	public SpriteRenderer buildingImage;
 	public SpriteRenderer cantBuildImage;
 	public Slider buildingProgressBar;
 	public ParticleSystem explosion;
@@ -24,20 +25,34 @@ public class BuildingController : MonoBehaviour {
 		canBuild = true;
 	}
 
-	public void OnTriggerStay2D(Collider2D other)
+	public void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.gameObject.tag == "Building")
 		{
+			buildingImage.color = Color.red;
+
 			canBuild = false;
 			cantBuildImage.enabled = true;
 		}
 	}
 
+	public void OnTriggerStay2D(Collider2D other)
+	{
+		if(other.gameObject.tag == "Building")
+		{
+			buildingImage.color = Color.red;
+
+			canBuild = false;
+			cantBuildImage.enabled = true;
+		}
+	}
 
 	public void OnTriggerExit2D(Collider2D other)
 	{
 		if(other.gameObject.tag == "Building")
 		{
+			buildingImage.color = Color.white;
+
 			canBuild = true;
 			cantBuildImage.enabled = false;
 		}
@@ -54,6 +69,8 @@ public class BuildingController : MonoBehaviour {
 			routine = Constructing();
 
 			StartCoroutine (routine);
+
+			buildingImage.color = Color.white;
 		}
 		else
 		{
@@ -115,7 +132,7 @@ public class BuildingController : MonoBehaviour {
 
 	private IEnumerator SpawnFlyingCoins(int count)
 	{
-		WaitForSeconds delay = new WaitForSeconds (GameController.instance.delayBetweenCoinSpawn);
+		WaitForSeconds delay = new WaitForSeconds (GameController.instance.delayBetweenCoinSpawn / count);
 
 		for(int spawned = 0; spawned<count; spawned++)
 		{

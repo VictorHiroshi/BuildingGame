@@ -339,6 +339,7 @@ MonoBehaviour:
   timeToBuild: 15
   income: 1
   cost: 5
+  buildingImage: {fileID: 212689538648028692}
   cantBuildImage: {fileID: 212519171982190608}
   buildingProgressBar: {fileID: 114045876659949932}
   explosion: {fileID: 198244869177898360}
