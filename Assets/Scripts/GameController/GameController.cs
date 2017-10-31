@@ -115,12 +115,12 @@ public class GameController : MonoBehaviour {
 	public void BuildNew(GameObject building)
 	{
 		cameraScript.SetCanMoveTo (false);
-		buttonCanvas.Hide ();
+		buttonCanvas.PlacingBuildingPanel (true);
 
 		if (!Input.GetMouseButton (0)) 
 		{
 			cameraScript.SetCanMoveTo (true);
-			buttonCanvas.Show ();
+			buttonCanvas.PlacingBuildingPanel (false);
 			return;
 		}
 		
@@ -173,6 +173,6 @@ public class GameController : MonoBehaviour {
 		buildingController.Build ();
 
 		cameraScript.SetCanMoveTo (true);
-		buttonCanvas.Show ();
+		buttonCanvas.PlacingBuildingPanel (false);
 	}
 }

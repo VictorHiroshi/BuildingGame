@@ -10,6 +10,9 @@ public class ButtonsCanvasController : MonoBehaviour {
 	public Color buttonAllowedColor;
 	public Color buttonForbidenColor;
 
+	private TrashButtonScript trashButton;
+	private InfoButtonScript infoButton;
+
 	private List <ButtonClick> buttons;
 
 	void Awake()
@@ -19,6 +22,13 @@ public class ButtonsCanvasController : MonoBehaviour {
 		{
 			buttons.Add (buttonScript);
 		}
+
+		trashButton = GetComponentInChildren <TrashButtonScript> ();
+		infoButton = GetComponentInChildren <InfoButtonScript> ();
+
+		trashButton.gameObject.SetActive (false);
+		infoButton.gameObject.SetActive (false);
+
 	}
 
 	public void Hide()
@@ -29,6 +39,30 @@ public class ButtonsCanvasController : MonoBehaviour {
 	public void Show()
 	{
 		BuildingButtonsCanvasObject.enabled = true;
+	}
+
+	public void PlacingBuildingPanel(bool value)
+	{
+		if(value)
+		{
+			foreach (ButtonClick button in buttons) 
+			{
+				button.gameObject.SetActive (false);
+			}
+
+			trashButton.gameObject.SetActive (true);
+			infoButton.gameObject.SetActive (true);
+		}
+		else
+		{
+			trashButton.gameObject.SetActive (false);
+			infoButton.gameObject.SetActive (false);
+
+			foreach (ButtonClick button in buttons) 
+			{
+				button.gameObject.SetActive (true);
+			}
+		}
 	}
 
 	public void CheckButtons(int availableCoins)
