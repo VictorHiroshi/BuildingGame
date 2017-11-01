@@ -106,15 +106,17 @@ public class GameController : MonoBehaviour {
 		}
 	}
 
-	public void TurnMusic(bool value)
+	public void SwitchMusicPlayStatus()
 	{
-		if(value)
+		if(musicAudioSource.isPlaying)
 		{
-			musicAudioSource.Play ();
+			musicAudioSource.Pause ();
+			coinAudioSource.volume = 0f;
 		}
 		else
 		{
-			musicAudioSource.Stop ();
+			musicAudioSource.Play ();
+			coinAudioSource.volume = 1f;
 		}
 	}
 
