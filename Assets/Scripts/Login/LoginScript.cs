@@ -98,7 +98,8 @@ public class LoginScript : MonoBehaviour {
 		}
 		else
 		{
-			messageText.text = www.error;
+			messageText.text = www.error.Remove (0, 3);
+
 		}
 	}
 
@@ -125,6 +126,14 @@ public class LoginScript : MonoBehaviour {
 		else
 		{
 			messageText.text = www.error;
+
+			if (www.responseHeaders.Count > 0)
+			{
+				foreach (KeyValuePair<string, string> entry in www.responseHeaders)
+				{
+					Debug.Log(entry.Value + " value = key " + entry.Key);
+				}
+			}
 		}
 	}
 }
