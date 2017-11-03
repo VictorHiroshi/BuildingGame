@@ -97,12 +97,16 @@ public class GameController : MonoBehaviour {
 			buttonCanvas.Hide ();
 
 			Time.timeScale = 0;
+
+			musicAudioSource.Pause ();
 		} 
 		else
 		{
 			buttonCanvas.Show ();
 
 			Time.timeScale = 1;
+
+			musicAudioSource.Play ();
 		}
 	}
 

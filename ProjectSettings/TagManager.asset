@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Building
+  - Monster
   layers:
   - Default
   - TransparentFX
