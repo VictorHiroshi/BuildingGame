@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.Animations;
 
 public class MonsterController : MonoBehaviour {
 
@@ -49,6 +48,7 @@ public class MonsterController : MonoBehaviour {
 		}
 		else if(other.tag == "Building")
 		{
+			StartCoroutine (Satisfied ());
 			Destroy (other.gameObject);
 		}
 	}

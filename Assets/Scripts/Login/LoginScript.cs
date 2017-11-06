@@ -98,7 +98,14 @@ public class LoginScript : MonoBehaviour {
 		}
 		else
 		{
-			messageText.text = www.error.Remove (0, 3);
+			if(www.error == "Unknown Error")
+			{
+				messageText.text = "No internet conection!";
+			} 
+			else 
+			{
+				messageText.text = www.error.Remove (0, 3);
+			}
 
 		}
 	}

@@ -894,16 +894,6 @@ Prefab:
       propertyPath: infoPanel
       value: 
       objectReference: {fileID: 1440905158}
-    - target: {fileID: 114098231612469346, guid: 3c10458eeda16ce4eba5388944b344f9,
-        type: 2}
-      propertyPath: timeBetweenMonsterSpawn
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 114098231612469346, guid: 3c10458eeda16ce4eba5388944b344f9,
-        type: 2}
-      propertyPath: touchInput
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3c10458eeda16ce4eba5388944b344f9, type: 2}
   m_IsPrefabParent: 0

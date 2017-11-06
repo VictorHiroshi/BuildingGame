@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82571a4363fd6b043aaa8d50d686407b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  throwableCoinCost: 5
   touchInput: 1
   userName: {fileID: 0}
   coinCount: {fileID: 0}
@@ -230,3 +231,5 @@ MonoBehaviour:
   timeBetweenMonsterSpawn: 60
   showInfo: 0
   cancelPlacement: 0
+  cameraScript: {fileID: 0}
+  buildingCount: 0
