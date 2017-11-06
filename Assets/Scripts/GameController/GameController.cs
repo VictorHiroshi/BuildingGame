@@ -18,16 +18,21 @@ public class GameController : MonoBehaviour {
 	public GameObject coinPrefab;
 	public AudioSource coinAudioSource;
 	public AudioSource musicAudioSource;
+	public GameObject monsterPrefab;
+	public float timeBetweenMonsterSpawn;
+
 
 	[HideInInspector] public bool showInfo;
 	[HideInInspector] public bool cancelPlacement;
 
 	private int wallet = 0;
 	private bool isPaused;
-
+	private bool showedMonsterMessage;
 	private CameraController cameraScript;
 	private ButtonsCanvasController buttonCanvas;
 	private InputManager inputManager;
+	private WaitForSeconds monsterSpawnDelay;
+	private IEnumerator monsterRoutine;
 
 	void Awake()
 	{
@@ -73,6 +78,10 @@ public class GameController : MonoBehaviour {
 		infoPanel.HidePanel ();
 
 		isPaused = false;
+
+		monsterSpawnDelay = new WaitForSeconds (timeBetweenMonsterSpawn);
+		monsterRoutine = ManageMonsterSpawn ();
+		showedMonsterMessage = false;
 	}
 
 	void Update () {
@@ -86,6 +95,7 @@ public class GameController : MonoBehaviour {
 	{
 		userName.text = nickName;
 		Receive (coins);
+		StartCoroutine (monsterRoutine);
 	}
 
 	public void Pause()
@@ -171,6 +181,11 @@ public class GameController : MonoBehaviour {
 		return Camera.main.ScreenToWorldPoint (coinTarget.transform.position);
 	}
 
+	public void DefeatMonster()
+	{
+		StartCoroutine (monsterRoutine);
+	}
+
 	private IEnumerator PositionNewBuilding(GameObject building, BuildingController buildingController)
 	{
 		while(Input.GetMouseButton (0))
@@ -202,5 +217,22 @@ public class GameController : MonoBehaviour {
 
 		cameraScript.SetCanMoveTo (true);
 		buttonCanvas.PlacingBuildingPanel (false);
+	}
+
+	private IEnumerator ManageMonsterSpawn()
+	{
+		yield return monsterSpawnDelay;
+		SpawnMonster ();
+	}
+
+	private void SpawnMonster()
+	{
+		Instantiate (monsterPrefab);
+		if (!showedMonsterMessage) 
+		{
+			showedMonsterMessage = true;
+			infoPanel.ShowMonsterInfo ();
+			Pause ();
+		}
 	}
 }

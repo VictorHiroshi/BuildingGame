@@ -6,10 +6,12 @@ using UnityEngine.UI;
 public class InfoPanel : MonoBehaviour {
 	
 	public Text message;
-	public Image buildingImage;
+	public Image infoImage;
 	public GameObject infoPanel;
 	public GameObject rayCastBlocker;
 
+	private bool isMonsterInfo = false;
+	int monsterInfoPart = 0;
 
 	public void HidePanel()
 	{
@@ -17,6 +19,19 @@ public class InfoPanel : MonoBehaviour {
 			infoPanel.SetActive (false);
 		if(rayCastBlocker.activeInHierarchy)
 			rayCastBlocker.SetActive (false);
+
+		if(isMonsterInfo)
+		{
+			if (monsterInfoPart != 2) 
+			{
+				ShowMonsterInfo ();
+			}
+			else 
+			{
+				isMonsterInfo = false;
+				GameController.instance.Pause ();
+			}
+		}
 	}
 
 	public void ShowPanel()
@@ -29,7 +44,7 @@ public class InfoPanel : MonoBehaviour {
 	{
 		ShowPanel ();
 
-		buildingImage.sprite = building.buildingImage.sprite;
+		infoImage.sprite = building.buildingImage.sprite;
 
 
 
@@ -49,5 +64,26 @@ public class InfoPanel : MonoBehaviour {
 								(building.timeToBuild > 1 ? "s" : ""));
 
 		message.text = newMessage;
+	}
+
+	public void ShowMonsterInfo()
+	{
+		isMonsterInfo = true;
+		ShowPanel ();
+
+		infoImage.sprite = GameController.instance.monsterPrefab.GetComponent <SpriteRenderer> ().sprite;
+
+		if(monsterInfoPart == 0) 
+		{
+			message.text = "Beware! This is the coin-eater! He will destroy your buildings when his open mouth passes over them.";
+			monsterInfoPart++;
+		}
+		else if(monsterInfoPart == 1)
+		{
+			message.text = " To stop him you must use the coin button bellow to throw coins in his mouth. But you can only hit his mouth" +
+			" when it's open. Good luck!";
+			monsterInfoPart++;
+		}
+
 	}
 }

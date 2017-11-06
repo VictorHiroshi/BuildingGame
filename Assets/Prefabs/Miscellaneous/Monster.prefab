@@ -86,14 +86,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bff344c9cf35f1542843a79b0bd7e1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitsToDie: 5
   speed: 9
-  animator: {fileID: 9100000, guid: d17a4b79e9b6a0f4390b48dbeed013cb, type: 2}
+  timeStopedWhenSatisfied: 0
+  animatorController: {fileID: 0}
   mouthCollider: {fileID: 58111883265547818}
   movementBoundary:
-    xMin: -8
-    xMax: 8
-    yMin: -8
-    yMax: 8
+    xMin: -10
+    xMax: 10
+    yMin: -10
+    yMax: 10
 --- !u!212 &212555038606932394
 SpriteRenderer:
   m_ObjectHideFlags: 1

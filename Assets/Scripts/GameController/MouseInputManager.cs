@@ -20,7 +20,7 @@ public class MouseInputManager : InputManager {
 	public override void Zoom (Camera m_camera, float zoomSpeed)
 	{
 		//TODO: Zoom from scrollWheel.
-		float modifier = Input.GetAxisRaw ("Mouse ScrollWheel") * zoomSpeed;
+		float modifier = - Input.GetAxisRaw ("Mouse ScrollWheel") * zoomSpeed;
 
 		if (modifier == 0)
 			return;

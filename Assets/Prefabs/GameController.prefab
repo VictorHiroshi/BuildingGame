@@ -225,5 +225,8 @@ MonoBehaviour:
   coinPrefab: {fileID: 1234374522288970, guid: b4931e43883cca94cbf547472d4f55b1, type: 2}
   coinAudioSource: {fileID: 82458462362351472}
   musicAudioSource: {fileID: 82559120158214682}
+  monsterPrefab: {fileID: 1637563644884826, guid: 5e41b69bb3a23ea4190cb30a02a2ec84,
+    type: 2}
+  timeBetweenMonsterSpawn: 60
   showInfo: 0
   cancelPlacement: 0
