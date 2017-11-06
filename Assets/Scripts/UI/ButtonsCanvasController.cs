@@ -12,7 +12,7 @@ public class ButtonsCanvasController : MonoBehaviour {
 
 	private TrashButtonScript trashButton;
 	private InfoButtonScript infoButton;
-
+	private ThrowingCoinScript throwButton;
 	private List <ButtonClick> buttons;
 
 	void Awake()
@@ -25,9 +25,11 @@ public class ButtonsCanvasController : MonoBehaviour {
 
 		trashButton = GetComponentInChildren <TrashButtonScript> ();
 		infoButton = GetComponentInChildren <InfoButtonScript> ();
+		throwButton = GetComponentInChildren <ThrowingCoinScript> ();
 
 		trashButton.gameObject.SetActive (false);
 		infoButton.gameObject.SetActive (false);
+		throwButton.gameObject.SetActive (false);
 
 	}
 
@@ -62,6 +64,34 @@ public class ButtonsCanvasController : MonoBehaviour {
 			{
 				button.gameObject.SetActive (true);
 			}
+		}
+	}
+
+	public void SetMonsterAttackPanelTo(bool value)
+	{
+		if(value)
+		{
+			trashButton.gameObject.SetActive (false);
+			infoButton.gameObject.SetActive (false);
+
+			foreach (ButtonClick button in buttons) 
+			{
+				button.gameObject.SetActive (false);
+			}
+
+			throwButton.gameObject.SetActive (true);
+		}
+		else
+		{
+			trashButton.gameObject.SetActive (false);
+			infoButton.gameObject.SetActive (false);
+
+			foreach (ButtonClick button in buttons) 
+			{
+				button.gameObject.SetActive (true);
+			}
+
+			throwButton.gameObject.SetActive (false);
 		}
 	}
 

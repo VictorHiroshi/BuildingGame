@@ -31,6 +31,7 @@ public class MonsterController : MonoBehaviour {
 		{
 			target.x = Random.Range (movementBoundary.xMin, movementBoundary.xMax);
 			target.y = Random.Range (movementBoundary.yMin, movementBoundary.yMax);
+			target.z = target.y + 0.5f;
 
 			movingRoutine = Move ();
 

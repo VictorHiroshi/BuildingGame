@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public enum BuildingType {Houses, Factory, Mall, Park, Farm};
 
@@ -24,11 +25,11 @@ public class GameController : MonoBehaviour {
 
 	[HideInInspector] public bool showInfo;
 	[HideInInspector] public bool cancelPlacement;
+	[HideInInspector] public CameraController cameraScript;
 
 	private int wallet = 0;
 	private bool isPaused;
 	private bool showedMonsterMessage;
-	private CameraController cameraScript;
 	private ButtonsCanvasController buttonCanvas;
 	private InputManager inputManager;
 	private WaitForSeconds monsterSpawnDelay;
@@ -184,6 +185,7 @@ public class GameController : MonoBehaviour {
 	public void DefeatMonster()
 	{
 		StartCoroutine (monsterRoutine);
+		buttonCanvas.SetMonsterAttackPanelTo (false);
 	}
 
 	private IEnumerator PositionNewBuilding(GameObject building, BuildingController buildingController)
@@ -223,11 +225,15 @@ public class GameController : MonoBehaviour {
 	{
 		yield return monsterSpawnDelay;
 		SpawnMonster ();
+
+		yield return new WaitForSeconds (0.3f);
+		buttonCanvas.SetMonsterAttackPanelTo (true);
 	}
 
 	private void SpawnMonster()
 	{
 		Instantiate (monsterPrefab);
+		buttonCanvas.SetMonsterAttackPanelTo (true);
 		if (!showedMonsterMessage) 
 		{
 			showedMonsterMessage = true;
