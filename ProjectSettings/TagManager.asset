@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Building
   - Monster
+  - Throwable
   layers:
   - Default
   - TransparentFX

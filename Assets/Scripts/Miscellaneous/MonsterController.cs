@@ -40,6 +40,19 @@ public class MonsterController : MonoBehaviour {
 
 	}
 
+	public void OnTriggerStay2D(Collider2D other)
+	{
+		if(other.tag == "Throwable")
+		{
+			Hit ();
+			Destroy (other.gameObject);
+		}
+		else if(other.tag == "Building")
+		{
+			Destroy (other.gameObject);
+		}
+	}
+
 	public void SetMouthToTrue()
 	{
 		mouthCollider.enabled = true;
@@ -98,6 +111,7 @@ public class MonsterController : MonoBehaviour {
 
 	private void Die()
 	{
+		GameController.instance.DefeatMonster ();
 		Destroy (gameObject);
 	}
 }

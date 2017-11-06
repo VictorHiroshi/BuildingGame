@@ -897,12 +897,12 @@ Prefab:
     - target: {fileID: 114098231612469346, guid: 3c10458eeda16ce4eba5388944b344f9,
         type: 2}
       propertyPath: timeBetweenMonsterSpawn
-      value: 10
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 114098231612469346, guid: 3c10458eeda16ce4eba5388944b344f9,
         type: 2}
       propertyPath: touchInput
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3c10458eeda16ce4eba5388944b344f9, type: 2}

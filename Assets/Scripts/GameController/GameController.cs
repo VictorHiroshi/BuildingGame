@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public enum BuildingType {Houses, Factory, Mall, Park, Farm};
 
 public class GameController : MonoBehaviour {
 
+	public int throwableCoinCost = 5;
 	public bool touchInput = true;
 	public static GameController instance;
 	public Text userName;
@@ -26,10 +28,13 @@ public class GameController : MonoBehaviour {
 	[HideInInspector] public bool showInfo;
 	[HideInInspector] public bool cancelPlacement;
 	[HideInInspector] public CameraController cameraScript;
+	[HideInInspector] public int buildingCount;
 
 	private int wallet = 0;
 	private bool isPaused;
 	private bool showedMonsterMessage;
+	private bool isMonsterActive;
+	private bool gameOver;
 	private ButtonsCanvasController buttonCanvas;
 	private InputManager inputManager;
 	private WaitForSeconds monsterSpawnDelay;
@@ -81,8 +86,10 @@ public class GameController : MonoBehaviour {
 		isPaused = false;
 
 		monsterSpawnDelay = new WaitForSeconds (timeBetweenMonsterSpawn);
-		monsterRoutine = ManageMonsterSpawn ();
 		showedMonsterMessage = false;
+		isMonsterActive = false;
+		buildingCount = 0;
+		gameOver = false;
 	}
 
 	void Update () {
@@ -90,13 +97,29 @@ public class GameController : MonoBehaviour {
 		{
 			Application.Quit();
 		}
+
+		if (buildingCount <= 0 && isMonsterActive && !CanThrowCoins() && !gameOver)
+		{
+			gameOver = true;
+			infoPanel.GameOverMessage ();
+		}
+	}
+
+	public void RestartGame()
+	{
+		SceneManager.LoadScene (0);
+	}
+
+	public bool CanThrowCoins()
+	{
+		return wallet >= throwableCoinCost;
 	}
 
 	public void Logged(string nickName, int coins)
 	{
 		userName.text = nickName;
 		Receive (coins);
-		StartCoroutine (monsterRoutine);
+		StartCoroutine (ManageMonsterSpawn ());
 	}
 
 	public void Pause()
@@ -184,8 +207,9 @@ public class GameController : MonoBehaviour {
 
 	public void DefeatMonster()
 	{
-		StartCoroutine (monsterRoutine);
+		StartCoroutine (ManageMonsterSpawn ());
 		buttonCanvas.SetMonsterAttackPanelTo (false);
+		isMonsterActive = false;
 	}
 
 	private IEnumerator PositionNewBuilding(GameObject building, BuildingController buildingController)
@@ -232,8 +256,10 @@ public class GameController : MonoBehaviour {
 
 	private void SpawnMonster()
 	{
+		isMonsterActive = true;
 		Instantiate (monsterPrefab);
 		buttonCanvas.SetMonsterAttackPanelTo (true);
+
 		if (!showedMonsterMessage) 
 		{
 			showedMonsterMessage = true;

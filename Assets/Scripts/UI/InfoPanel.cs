@@ -11,6 +11,7 @@ public class InfoPanel : MonoBehaviour {
 	public GameObject rayCastBlocker;
 
 	private bool isMonsterInfo = false;
+	private bool gameOver = false;
 	int monsterInfoPart = 0;
 
 	public void HidePanel()
@@ -31,6 +32,11 @@ public class InfoPanel : MonoBehaviour {
 				isMonsterInfo = false;
 				GameController.instance.Pause ();
 			}
+		}
+
+		if(gameOver)
+		{
+			GameController.instance.RestartGame ();
 		}
 	}
 
@@ -85,5 +91,14 @@ public class InfoPanel : MonoBehaviour {
 			monsterInfoPart++;
 		}
 
+	}
+
+	public void GameOverMessage()
+	{
+		ShowPanel ();
+		infoImage.sprite = GameController.instance.monsterPrefab.GetComponent <SpriteRenderer> ().sprite;
+
+		message.text = "GameOver";
+		gameOver = true;
 	}
 }

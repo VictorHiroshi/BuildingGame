@@ -19,9 +19,21 @@ public class ThrowingCoinScript : MonoBehaviour, IPointerDownHandler, IPointerUp
 		buttonImage = GetComponent <Image> ();
 	}
 
+	void Update()
+	{
+		if(GameController.instance.CanThrowCoins ())
+		{
+			buttonImage.color = activeButtonColor;
+		}
+		else
+		{
+			buttonImage.color = inactiveButtonColor;
+		}
+	}
+
 	public void OnPointerDown(PointerEventData eventData)
 	{
-		if(active)
+		if(active && GameController.instance.CanThrowCoins ())
 		{
 			GameController.instance.cameraScript.SetCanMoveTo (false);
 
@@ -78,13 +90,15 @@ public class ThrowingCoinScript : MonoBehaviour, IPointerDownHandler, IPointerUp
 			yield return null;
 		}
 
-		if(mouseOverButton)
+		ThrowableCoin coinScript = coin.GetComponent <ThrowableCoin> ();
+
+		if(mouseOverButton || coinScript == null)
 		{
 			Destroy (coin.gameObject);
 		}
 		else
 		{
-			
+			coinScript.Throw ();
 		}
 	}
 

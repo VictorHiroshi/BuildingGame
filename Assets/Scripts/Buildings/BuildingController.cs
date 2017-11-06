@@ -26,6 +26,16 @@ public class BuildingController : MonoBehaviour {
 		canBuild = true;
 	}
 
+	void Start()
+	{
+		GameController.instance.buildingCount++;
+	}
+
+	void OnDestroy()
+	{
+		GameController.instance.buildingCount--;
+	}
+
 	public void OnTriggerEnter2D(Collider2D other)
 	{
 		if(other.gameObject.tag == "Building")
