@@ -39,6 +39,8 @@ public class GameController : MonoBehaviour {
 	private InputManager inputManager;
 	private WaitForSeconds monsterSpawnDelay;
 	private IEnumerator monsterRoutine;
+	private IEnumerator buildingRoutine;
+	private BuildingController buildingInstance;
 
 	void Awake()
 	{
@@ -128,11 +130,20 @@ public class GameController : MonoBehaviour {
 
 		if (isPaused) 
 		{
-			buttonCanvas.Hide ();
-
 			Time.timeScale = 0;
 
 			musicAudioSource.Pause ();
+
+			if (buildingInstance != null) 
+			{
+				Destroy (buildingInstance.gameObject);
+				cameraScript.SetCanMoveTo (true);
+				buttonCanvas.PlacingBuildingPanel (false);
+				StopCoroutine (buildingRoutine);
+			}
+
+			buttonCanvas.Hide ();
+
 		} 
 		else
 		{
@@ -174,12 +185,13 @@ public class GameController : MonoBehaviour {
 
 		GameObject instance = Instantiate (building, clickPosition, Quaternion.identity);
 
-		BuildingController buildingController = instance.GetComponent <BuildingController> ();
+		buildingInstance = instance.GetComponent <BuildingController> ();
 
 		cancelPlacement = false;
 		showInfo = false;
 
-		StartCoroutine (PositionNewBuilding (instance, buildingController));
+		buildingRoutine = PositionNewBuilding ();
+		StartCoroutine (buildingRoutine);
 	}
 
 	public void Spend(int coins)
@@ -212,7 +224,7 @@ public class GameController : MonoBehaviour {
 		isMonsterActive = false;
 	}
 
-	private IEnumerator PositionNewBuilding(GameObject building, BuildingController buildingController)
+	private IEnumerator PositionNewBuilding()
 	{
 		while(Input.GetMouseButton (0))
 		{
@@ -221,26 +233,27 @@ public class GameController : MonoBehaviour {
 			//Guarantees that the buildings most on top of the screen will be drawed behind.
 			worldPosition.z = worldPosition.y;
 
-			building.transform.position = worldPosition;
+			buildingInstance.gameObject.transform.position = worldPosition;
 
 			yield return null;
 		}
 
 		if(showInfo)
 		{
-			infoPanel.DisplayInfo (buildingController);
+			infoPanel.DisplayInfo (buildingInstance);
 
-			Destroy (buildingController.gameObject);
+			Destroy (buildingInstance.gameObject);
 		}
 		else if(cancelPlacement)
 		{
-			Destroy (buildingController.gameObject);
+			Destroy (buildingInstance.gameObject);
 		}
 		else
 		{
-			buildingController.Build ();
+			buildingInstance.Build ();
 		}
 
+		buildingInstance = null;
 		cameraScript.SetCanMoveTo (true);
 		buttonCanvas.PlacingBuildingPanel (false);
 	}
