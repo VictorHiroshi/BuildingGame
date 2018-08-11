@@ -14,6 +14,7 @@ public class LoginScript : MonoBehaviour {
 	public Button confirmButton;
 	public GameObject rayCastBlocker;
 	public GameObject dataPanel;
+	public bool bypassConnection = true;
 
 	private WaitForSeconds blinkTextDelay;
 
@@ -38,11 +39,13 @@ public class LoginScript : MonoBehaviour {
 		IEnumerator messageRoutine = ShowDots ();
 		StartCoroutine (messageRoutine);
 
-		logged = false;
+		logged = bypassConnection;
 		loginData.username = userNameField.text;
 		loginData.SetPasswordToHashSHA256 (passwordField.text);
 
-		yield return StartCoroutine (FetchGameData ());
+		if(!bypassConnection) {
+			yield return StartCoroutine (FetchGameData ());
+		}
 
 		if(logged)
 		{
@@ -112,35 +115,42 @@ public class LoginScript : MonoBehaviour {
 
 	private IEnumerator FetchAdditionalData()
 	{
-		Dictionary<string, string> headers = new Dictionary<string, string> ();
-
-		headers.Add ("X-Authorization", gameData.token);
-
-		WWW www = new WWW (url + "/status", null, headers);
-
-		yield return www;
-
-		if(www.error == null)
-		{
-			//set user nickname and coins.
-			//GameController.instance.userName.text = gameData.profile.name;
-			AdditionalData data = JsonUtility.FromJson<AdditionalData> (www.text);
-
+		if(bypassConnection) {
 			logged = true;
+			GameController.instance.Logged ("AMonkey", 100);
 
-			GameController.instance.Logged (data.nickname, data.money);
-		}
-		else
-		{
-			messageText.text = www.error;
+		} else {
+			Dictionary<string, string> headers = new Dictionary<string, string> ();
 
-			if (www.responseHeaders.Count > 0)
+			headers.Add ("X-Authorization", gameData.token);
+
+			WWW www = new WWW (url + "/status", null, headers);
+
+			yield return www;
+
+			if(www.error == null)
 			{
-				foreach (KeyValuePair<string, string> entry in www.responseHeaders)
+				//set user nickname and coins.
+				//GameController.instance.userName.text = gameData.profile.name;
+				AdditionalData data = JsonUtility.FromJson<AdditionalData> (www.text);
+
+				logged = true;
+
+				GameController.instance.Logged (data.nickname, data.money);
+			}
+			else
+			{
+				messageText.text = www.error;
+
+				if (www.responseHeaders.Count > 0)
 				{
-					Debug.Log(entry.Value + " value = key " + entry.Key);
+					foreach (KeyValuePair<string, string> entry in www.responseHeaders)
+					{
+						Debug.Log(entry.Value + " value = key " + entry.Key);
+					}
 				}
 			}
 		}
+
 	}
 }
